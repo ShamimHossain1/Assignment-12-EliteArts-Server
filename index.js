@@ -18,22 +18,29 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
     serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
     }
-  });
-  
-  async function run() {
+});
+
+async function run() {
     try {
-      // Connect the client to the server	(optional starting in v4.7)
-      //await client.connect();
-      client.connect();
+        // Connect the client to the server	(optional starting in v4.7)
+        //await client.connect();
+        client.connect();
 
         const usersCollection = client.db('ass12').collection('users');
         const courseCollection = client.db('ass12').collection('course');
         const cartCollection = client.db('ass12').collection('carts');
         const paymentCollection = client.db('ass12').collection('payment');
+
+
+        //USER API
+        app.get('/ins', async (req, res) => {
+            const result = await usersCollection.find({ role: 'instructor' }).toArray();
+            res.send(result);
+        });
 
         // Send a ping to confirm a successful connection
         // Send a ping to confirm a successful connection
