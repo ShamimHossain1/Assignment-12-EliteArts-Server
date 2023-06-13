@@ -41,6 +41,17 @@ async function run() {
             const result = await usersCollection.find({ role: 'instructor' }).toArray();
             res.send(result);
         });
+        app.get('/history/:email', async (req, res) => {
+            const email = req.params.email;
+          
+            try {
+              const result = await paymentCollection.find({ email: email }).toArray();
+              res.send(result);
+            } catch (error) {
+              console.error(error);
+              res.status(500).send('Error retrieving payment history');
+            }
+          });
 
         // Send a ping to confirm a successful connection
         // Send a ping to confirm a successful connection
