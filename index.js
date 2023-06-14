@@ -80,6 +80,22 @@ async function run() {
       res.send(result);
     })
 
+    // instructor
+    app.get('/users/ins/:email',   async (req, res) => {
+      const email = req.params.email.toLowerCase();
+      console.log({email})
+    
+      // if (req.decoded.email !== email) {
+      //   res.send({ instructor: false });
+      // }
+    
+      const query = { email: email };
+      const user = await usersCollection.findOne(query);
+      console.log(user)
+      const result = { instructor: user?.role === 'instructor' };
+      res.send(result);
+    });
+
 
 
 
