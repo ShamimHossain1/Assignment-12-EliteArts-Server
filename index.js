@@ -122,6 +122,14 @@ async function run() {
       res.send(result);
     })
 
+    //add
+    app.post('/course', async (req, res) => {
+      const newCourse = req.body;
+
+      const result = await courseCollection.insertOne(newCourse);
+      res.send(result);
+    })
+
 
 
 
