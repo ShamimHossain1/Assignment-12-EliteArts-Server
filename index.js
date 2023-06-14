@@ -141,6 +141,19 @@ async function run() {
       res.send(result);    
    })
 
+     // for ins 
+     app.get('/course/:email', async (req, res) => {
+      const email = req.params.email;
+    
+      try {
+        const result = await courseCollection.find({ email: email }).toArray();
+        res.send(result);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving course data');
+      }
+    });
+
 
 
 
